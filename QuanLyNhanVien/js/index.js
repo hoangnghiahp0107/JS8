@@ -40,7 +40,8 @@ function createNV(){
 
     // B5: Gọi hàm resetForm để xóa hết tất cả value của các input
     resetForm();
-    
+     // B6: Lưu studentList xuống localStorage
+    storeStudentList();
 
 }
 
@@ -75,6 +76,8 @@ function deleteNhanvien(nhanvienID){
     });
     // Gọi hàm renderTable để cập nhật giao diện
     renderTable(nhanvienList);
+    // Lưu studentList xuống localStorage
+     storeStudentList();
 } 
 
 //Hàm tìm nhân viên theo id để fill thông tin lên form
@@ -137,6 +140,8 @@ function UpdateNV(){
     renderTable(nhanvienList);
     // B5: Gọi hàm reset form
     resetForm();
+     // B6: Lưu studentList xuống localStorage
+     storeStudentList();
 }
 // Hàm hiển thị danh sách ra table
 function renderTable(nhanvienList){
