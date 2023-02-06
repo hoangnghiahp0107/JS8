@@ -40,8 +40,6 @@ function createNV(){
 
     // B5: Gọi hàm resetForm để xóa hết tất cả value của các input
     resetForm();
-     // B6: Lưu studentList xuống localStorage
-    storeStudentList();
 
 }
 
@@ -49,11 +47,12 @@ function createNV(){
 function search(){
     // B1: DOM
     let searchName=getElement("#searchName").value;
+
     // B2: Lọc những user có name khớp với giá trị search
     let newList = nhanvienList.filter((nhanvien)=>{
-        let xeploai=nhanvien.xeploai.toLowerCase();
+        let xeploai =nhanvien.xeploai.toLowerCase();
         searchName = searchName.toLowerCase();
-        return nhanvien.xeploai.indexOf(searchName) !==-1;
+        return xeploai.indexOf(searchName) !==-1;
     })
     // B3: Gọi hàm renderTable để hiển thị ra giao diện
     renderTable(newList);
@@ -76,8 +75,6 @@ function deleteNhanvien(nhanvienID){
     });
     // Gọi hàm renderTable để cập nhật giao diện
     renderTable(nhanvienList);
-    // Lưu studentList xuống localStorage
-     storeStudentList();
 } 
 
 //Hàm tìm nhân viên theo id để fill thông tin lên form
@@ -99,7 +96,8 @@ function Update(nhanvienID){
     getElement("#chucvu").value=Capnhat.chucvu;
     getElement("#gioLam").value=Capnhat.giolam;
     // B3: Disable input mã sv và button thêm sv
-    getElement("#btnThemNV").disable=true;
+    getElement("#btnThemNV").setAttribute('disabled','');
+    getElement("#tknv").setAttribute('disabled','');
 } 
 // Hàm cập nhật thông tin sinh viên
 function UpdateNV(){ 
@@ -140,8 +138,6 @@ function UpdateNV(){
     renderTable(nhanvienList);
     // B5: Gọi hàm reset form
     resetForm();
-     // B6: Lưu studentList xuống localStorage
-     storeStudentList();
 }
 // Hàm hiển thị danh sách ra table
 function renderTable(nhanvienList){
@@ -156,7 +152,7 @@ function renderTable(nhanvienList){
         <td>${nhanvien.day}</td>
         <td>${nhanvien.chucvu}</td>
         <td>${nhanvien.calcScore()}</td>
-        <td>${nhanvien.xeploai()}</td>
+        <td >${nhanvien.xeploai()}</td>
         <td>
         <button class = "btn btn-primary mb-3" onclick="Update('${nhanvien.id}')" data-toggle="modal" data-target="#myModal">Chỉnh sửa</button>
         <br>
@@ -180,7 +176,8 @@ function resetForm(){
     getElement("#chucvu").value="";
     getElement("#gioLam").value="";
 
-    getElement("#btnThemNV").disable=false;
+    getElement("#btnThemNV").removeAttribute('disabled');
+    getElement("#tknv").removeAttribute('disabled');
 }
 function getElement(selector){
     return document.querySelector(selector);
@@ -294,37 +291,3 @@ function validate(){
         }
     return isValid;
 }
-function storeStudentList() {
-    // Chuyển array studentList thành JSON
-    const json = JSON.stringify(nhanvienList);
-    // Lưu xuống localStorage với key studentList
-    localStorage.setItem("nhanvienList", json);
-  }
-  
-  function getStudentList() {
-    // Lấy data từ localStorage với key studentList
-    const json = localStorage.getItem("nhanvienList");
-    if (!json) {
-      return [];
-    }
-  
-    // Chuyển JSON thành array
-    const nhanvienList = JSON.parse(json);
-    // Bởi vì khi chuyển object thành JSON, tất cả phương thức của object đó đều bị mất
-    // Ta cần khởi tạo lại các object từ constructor để các object có thể sử dụng lại các phương thức
-    for (let i = 0; i < nhanvienList.length; i++) {
-      const nhanvien = nhanvienListList[i];
-     nhanvienList[i] = new Nhanvien(
-        nhanvien.id,
-        nhanvien.name,
-        nhanvien.email,
-        nhanvien.password,
-        nhanvien.day,
-        nhanvien.luongCB,
-        nhanvien.chucvu,
-        nhanvien.giolam,
-      );
-    }
-  
-    return nhanvienList;
-  }

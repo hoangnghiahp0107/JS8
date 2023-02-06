@@ -21,17 +21,17 @@ function Nhanvien(
     this.tongluong=tongluong;
     this.loainhanvien=loainhanvien;
 }
-Nhanvien.prototype.calcScore= function(){
+Nhanvien.prototype.calcScore= function (){
     let chucvu=getElement("#chucvu").value;
-    if (chucvu==="Sếp")
+    if (this.chucvu==="Sếp")
     {
         chucvu=3;
     }
-    else if (chucvu==="Trưởng phòng")
+    else if (this.chucvu==="Trưởng phòng")
     {
         chucvu=2;
     }
-    else if (chucvu==="Nhân viên")
+    else if (this.chucvu==="Nhân viên")
     {
         chucvu=1;
     }
@@ -39,20 +39,20 @@ Nhanvien.prototype.calcScore= function(){
 }
 Nhanvien.prototype.xeploai= function(){
     let giolam=+getElement("#gioLam").value;
-    if (giolam>=192)
+    if (this.giolam>=192)
     {
-        return "Nhân viên xuất sắc";
+        return "Xuất sắc";
     }
-    if (giolam>=176)
+    if (this.giolam>=176)
     {
-        return "Nhân viên giỏi";
+        return "Giỏi";
     }
-    if (giolam>=160)
+    if (this.giolam>=160)
     {
-        return"Nhân viên khá";
+        return"Khá";
     }
     else
     {
-        return "Nhân viên trung bình";
+        return "Trung bình";
     }
 }
