@@ -37,7 +37,7 @@ Nhanvien.prototype.calcScore= function (){
     }
     return (this.luongCB*chucvu);
 }
-Nhanvien.prototype.xeploai= function(){
+Nhanvien.prototype.xeploai= function xeploai(){
     let giolam=+getElement("#gioLam").value;
     if (this.giolam>=192)
     {

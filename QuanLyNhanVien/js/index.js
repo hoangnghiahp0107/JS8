@@ -50,7 +50,7 @@ function search(){
 
     // B2: Lọc những user có name khớp với giá trị search
     let newList = nhanvienList.filter((nhanvien)=>{
-        let xeploai =nhanvien.xeploai.toLowerCase();
+        let xeploai =nhanvien.xeploai().toLowerCase();
         searchName = searchName.toLowerCase();
         return xeploai.indexOf(searchName) !==-1;
     })
